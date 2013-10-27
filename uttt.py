@@ -2,18 +2,14 @@ class Game(object):
     """The Ultimate game class."""
 
     def __init__(self):
-        # # List of 9 small boards
-        # self.boards = [Board() for i in range(10)]
-        # # The main board that is trying to be won
-        # self.main_board = Board()
-        self.p1 = Player('x')
-        self.p2 = Player('o')
+        self.p1 = Player(1, 'x')
+        self.p2 = Player(2, 'o')
         self.current_player = self.p1
 
     def has_winner(self):
         pass
 
-    def print_board(self):
+    def get_board(self):
         pass
 
     def next_move(self):
@@ -35,6 +31,8 @@ class Game(object):
     def __repr__(self):
         pass
 
+    def __str__(self):
+        return self.get_board()
 
 class Board(object):
     """Represents a standard 3x3 tic-tac-toe board."""
