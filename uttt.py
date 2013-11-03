@@ -18,13 +18,6 @@ class Game(object):
     def message(self, msg):
         pass
 
-    #def is_valid_move(self, move):
-    #    a, b = move
-    #    if a == self._next_board or self._next_board == -1:
-    #        self.boards[a].is_valid_move(b)
-    #    else:
-    #        False
-
     def run(self):
         pass
 
