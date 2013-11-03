@@ -2,9 +2,23 @@ class Game(object):
     """The Ultimate game class."""
 
     def __init__(self):
-        self.p1 = Player(1, 'x')
-        self.p2 = Player(2, 'o')
-        self.current_player = self.p1
+        self.p1 = Player('x')
+        self.p2 = Player('o')
+        self.current_player = None  # self.decide_order()
+        self.subboards = [Board() for _ in range(9)]
+        self.mainboard = Board()
+
+    def decide_order(self):
+        # TODO: Add random option
+        text = "Who would like to go first? (1 / 2): "
+        while True:
+            player = input(text)
+            if player == "1":
+                return self.p1
+            elif player == "2":
+                return self.p2
+            else:
+                print("Please select either 1 or 2")
 
     def has_winner(self):
         pass
@@ -19,7 +33,10 @@ class Game(object):
         pass
 
     def run(self):
-        pass
+        self.current_player = self.decide_order()
+        # TODO: Implement the main game loop
+        while True:
+            print("Nyaa~")
 
     def __repr__(self):
         pass
@@ -27,10 +44,11 @@ class Game(object):
     def __str__(self):
         return self.get_board()
 
+
 class Board(object):
     """Represents a standard 3x3 tic-tac-toe board."""
     def __init__(self):
-        self.spaces = [i for i in range(9)]
+        self.spaces = [" " for i in range(9)]
         self.avail = set(self.spaces)
         self.won = False    # make property
 
@@ -56,17 +74,22 @@ class Board(object):
             raise Exception("Invalid Move! >:(")
 
     def __repr__(self):
-        return self.spaces
+        return str(self.spaces)
 
     def __str__(self):
-        divider = "-------"
-        row1 = "{}|{}|{}".format(*self.spaces[:3]) # TODO: stop printing initialized numbers
+        # TODO: List comprehensions yo
+        divider = "-----"
+        row1 = "{}|{}|{}".format(*self.spaces[:3])
+        row2 = "{}|{}|{}".format(*self.spaces[3:6])
+        row3 = "{}|{}|{}".format(*self.spaces[6:])
+        return "\n".join([row1, divider, row2, divider, row3])
 
 
+# Is this class even necessary?
+# Probably not. It should be removed.
 class Player(object):
     """The player object"""
-    def __init__(self, turn, symbol):
-        self.turn = turn    # 1st or 2nd
+    def __init__(self, symbol):
         self.symbol = symbol
 
     def __repr__(self):
